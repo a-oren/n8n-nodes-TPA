@@ -1,12 +1,7 @@
-![Banner image](https://user-images.githubusercontent.com/10284570/173569848-c624317f-42b1-45a6-ab09-f0ea3c247648.png)
+# n8n-nodes-TPA
 
-# n8n-nodes-starter
+Local node for Red Hat Trusted Profile Analyzer that can be connected to n8n. Red Hat Trusted Profile Analyzer allows exploration of the relationships between an organization's applications, vulnerabilities and dependencies by consuming and managing Software Bill of Materials (SBOMs), Vulnerability Exploitability eXchange (VEX) information from various vulnerability databases. Trusted Profile Analyzer is a tool for DevSecOps and developers to better understand the organization's risk profile.
 
-This repo contains example nodes to help you get started building your own custom integrations for [n8n](https://n8n.io). It includes the node linter and other dependencies.
-
-To make your custom node available to the community, you must create it as an npm package, and [submit it to the npm registry](https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry).
-
-If you would like your node to be available on n8n cloud you can also [submit your node for verification](https://docs.n8n.io/integrations/creating-nodes/deploy/submit-community-nodes/).
 
 ## Prerequisites
 
@@ -20,29 +15,46 @@ You need the following installed on your development machine:
   ```
 * Recommended: follow n8n's guide to [set up your development environment](https://docs.n8n.io/integrations/creating-nodes/build/node-development-environment/).
 
-## Using this starter
+## Using this node
 
-These are the basic steps for working with the starter. For detailed guidance on creating and publishing nodes, refer to the [documentation](https://docs.n8n.io/integrations/creating-nodes/).
+These are the basic steps for working with the node.
 
-1. [Generate a new repository](https://github.com/n8n-io/n8n-nodes-starter/generate) from this template repository.
-2. Clone your new repo:
-   ```
-   git clone https://github.com/<your organization>/<your-repo-name>.git
-   ```
-3. Run `npm i` to install dependencies.
-4. Open the project in your editor.
-5. Browse the examples in `/nodes` and `/credentials`. Modify the examples, or replace them with your own nodes.
-6. Update the `package.json` to match your details.
-7. Run `npm run lint` to check for errors or `npm run lintfix` to automatically fix errors when possible.
-8. Test your node locally. Refer to [Run your node locally](https://docs.n8n.io/integrations/creating-nodes/test/run-node-locally/) for guidance.
-9. Replace this README with documentation for your node. Use the [README_TEMPLATE](README_TEMPLATE.md) to get started.
-10. Update the LICENSE file to use your details.
-11. [Publish](https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry) your package to npm.
+1. Clone the repo
+2. Run `npm i` to install dependencies.
+3. 
+	In your node directory
+	```
+	npm run build
+	npm link
+	```
+  
+4. In the nodes directory within your n8n installation
+	```
+	npm link n8n-nodes-TPA
+	```
 
-## More information
+* Check your directory
 
-Refer to our [documentation on creating nodes](https://docs.n8n.io/integrations/creating-nodes/) for detailed information on building your own nodes.
+	Make sure you run npm link n8n-nodes-TPA in the nodes directory within your n8n installation. This can be:
 
-## License
+	~/.n8n/custom/
 
-[MIT](https://github.com/n8n-io/n8n-nodes-starter/blob/master/LICENSE.md)
+5. Start n8n:
+	```
+	n8n start
+	```
+
+## Troubleshooting
+
+There's no custom directory in ~/.n8n local installation.
+
+You have to create custom directory manually and run npm init
+
+
+In ~/.n8n directory run:
+```
+mkdir custom 
+cd custom 
+npm init
+```
+
