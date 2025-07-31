@@ -17,8 +17,22 @@ export class Tpa implements INodeType {
     usableAsTool: true,
     credentials: [
       {
-        name: 'trustifyOAuth2Api',
+        name: 'trustifyClientCred',
         required: true,
+        displayOptions: {
+          show: {
+            authMethod: ['clientCredentials'],
+          },
+        },
+      },
+      {
+        name: 'trustifyAuthCode',
+        required: true,
+        displayOptions: {
+          show: {
+            authMethod: ['authorizationCode'],
+          },
+        },
       },
     ],
     requestDefaults: {
@@ -29,6 +43,23 @@ export class Tpa implements INodeType {
       },
     },
     properties: [
+      {
+        displayName: 'Authentication Method',
+        name: 'authMethod',
+        type: 'options',
+        options: [
+          {
+            name: 'Authorization Code',
+            value: 'authorizationCode',
+          },
+          {
+            name: 'Client Credentials',
+            value: 'clientCredentials',
+          },
+        ],
+        default: 'authorizationCode',
+        description: 'Choose how to authenticate to Trustify API',
+      },
       {
         displayName: 'Base URL',
         name: 'baseURL',
@@ -152,9 +183,16 @@ export class Tpa implements INodeType {
         returnFullResponse: false,
       };
 
+      const authMethod = this.getNodeParameter('authMethod', 0) as string;
+
+      const credentialName =
+        authMethod === 'authorizationCode'
+          ? 'trustifyAuthCode'
+          : 'trustifyClientCred';
+
       const response = await this.helpers.httpRequestWithAuthentication.call(
         this,
-        'trustifyOAuth2Api',
+        credentialName,
         options,
       );
 
