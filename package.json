@@ -33,7 +33,8 @@
   "n8n": {
     "n8nNodesApiVersion": 1,
     "credentials": [
-      "dist/credentials/TrustifyOAuth2Api.credentials.js"
+      "dist/credentials/TrustifyClientCred.credentials.js",
+      "dist/credentials/TrustifyAuthCode.credentials.js"
     ],
     "nodes": [
       "dist/nodes/TPA/Tpa.node.js"
